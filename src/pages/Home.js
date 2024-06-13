@@ -10,9 +10,6 @@ const Home = () => {
       <Section className={styles.sectionOne}>
         <AnimatedSection />
       </Section>
-      <Section className={styles.sectionTwo}>
-        👁️👁️
-      </Section>
     </div>
   );
 };

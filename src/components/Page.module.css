@@ -1,0 +1,13 @@
+/* src/components/Page.module.css */
+.page {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    color: #000;
+    border-radius: 10px;
+  }
+  
