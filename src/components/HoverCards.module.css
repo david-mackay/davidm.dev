@@ -1,100 +1,53 @@
+/* src/components/HoverCards.module.css */
 .container {
-    display: flex;
-    height: 100vh;
-    width: 100vw;
-    position: relative; /* Ensure ripple is behind the hover cards */
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 30%;
+  padding: 1rem;
+}
+
+.card {
+  background-color: #444;
+  color: white;
+  padding: 1rem;
+  margin: 1rem 0;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  border-radius: 10px;
+  position: relative;
+  z-index: 3;
+}
+
+.card:hover {
+  background-color: #666;
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column-reverse;
   }
-  
+
   .left {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    width: 30%;
-    padding: 1rem;
-  }
-  
-  .right {
-    display: flex;
-    justify-content: center;
+    width: 90%;
+    flex-direction: row;
+    justify-content: space-around;
     align-items: center;
-    width: 70%;
-    padding: 1rem;
-    overflow: hidden;
   }
-  
+
   .card {
-    background-color: #444;
-    color: white;
-    padding: 1rem;
-    margin: 1rem 0;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
-    border-radius: 10px; /* Rounded corners */
-    position: relative;
-    z-index: 3; /* Ensure cards are above the ripple */
+    flex: 1;
+    margin: 0.2rem;
+    text-align: center;
+    max-width: 30vw;
   }
-  
-  .card:hover {
-    background-color: #666;
-    transform: scale(1.05); /* Slightly enlarge on hover */
-  }
-  
-  .cardDetail {
-    background-color: #282c34;
-    color: white;
-    padding: 2rem;
-    border-radius: 10px;
-    transition: opacity 0.5s;
-    position: relative;
-    z-index: 2; /* Ensure details are above the ripple */
-    height: 30vh;
-    width: 30vh;
-    overflow-y: auto; /* Enable vertical scrolling */
-  }
-  
-  .fadeIn {
-    opacity: 1;
-    animation: fadeIn 0.5s;
-  }
-  
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .container {
-      flex-direction: column-reverse; /* Stack the left section below the right section */
-    }
-  
-    .left {
-      width: 90%;
-      flex-direction: row;
-      justify-content: space-around;
-      align-items: center;
-    }
-  
-    .right {
-      width: 90%;
-      justify-content: center;
-      align-items: center;
-    }
-  
-    .card {
-      flex: 1;
-      margin: 0.2rem;
-      text-align: center;
-      max-width: 30vw; /* Ensure the cards do not exceed the viewport width */
-    }
-  
-    .cardDetail {
-      width: 100%;
-      margin: 0 auto 2rem auto; /* Adjust margin to ensure it is above the eyes */
-    }
-  }
-  
+}

@@ -1,13 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
-import Web3Page from './Web3Page';
-import FullStackPage from './FullStackPage';
-import PokerPage from './PokerPage';
+// src/components/HoverCards.js
+import React from 'react';
 import styles from './HoverCards.module.css';
 
-const HoverCards = () => {
-  const [hoveredCard, setHoveredCard] = useState(null);
-  const cardDetailRef = useRef(null);
-
+const HoverCards = ({ setHoveredCard }) => {
   const handleMouseEnter = (card) => {
     setHoveredCard(card);
   };
@@ -15,25 +10,6 @@ const HoverCards = () => {
   const handleMouseLeave = () => {
     setHoveredCard(null);
   };
-
-  useEffect(() => {
-    const handleWheel = (event) => {
-      if (cardDetailRef.current && cardDetailRef.current.contains(event.target)) {
-        event.stopPropagation();
-      }
-    };
-
-    const currentRef = cardDetailRef.current;
-    if (currentRef) {
-      currentRef.addEventListener('wheel', handleWheel, { passive: true });
-    }
-
-    return () => {
-      if (currentRef) {
-        currentRef.removeEventListener('wheel', handleWheel);
-      }
-    };
-  }, [hoveredCard]);
 
   return (
     <div className={styles.container}>
@@ -59,15 +35,6 @@ const HoverCards = () => {
         >
           Poker
         </div>
-      </div>
-      <div className={styles.right}>
-        {hoveredCard && (
-          <div className={`${styles.cardDetail} ${styles.fadeIn}`} ref={cardDetailRef}>
-            {hoveredCard === 'Web3' && <Web3Page />}
-            {hoveredCard === 'FullStack' && <FullStackPage />}
-            {hoveredCard === 'Poker' && <PokerPage />}
-          </div>
-        )}
       </div>
     </div>
   );

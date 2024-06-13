@@ -1,5 +1,5 @@
 // src/components/AnimatedSection.js
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useSpring, animated } from 'react-spring';
 import styled from 'styled-components';
 import HoverCards from './HoverCards'; // Import HoverCards component
@@ -38,6 +38,7 @@ const BackgroundLayer = styled(animated.div)`
 
 const AnimatedSection = () => {
   const sectionRef = useRef(null);
+  const [hoveredCard, setHoveredCard] = useState(null);
   const [{ xy, bg }, api] = useSpring(() => ({
     xy: [0, 0],
     bg: [0, 0],
@@ -63,13 +64,26 @@ const AnimatedSection = () => {
     }, 600); // Match the animation duration
   };
 
+  const getEmoji = () => {
+    switch (hoveredCard) {
+      case 'Web3':
+        return '🌐';
+      case 'FullStack':
+        return '💻';
+      case 'Poker':
+        return '🃏';
+      default:
+        return '👁️👁️';
+    }
+  };
+
   return (
     <SectionWrapper ref={sectionRef} onMouseMove={handleMouseMove}>
       <BackgroundLayer style={{ transform: bg.to(bgTrans) }} />
       <AnimatedText style={{ transform: xy.to(trans) }}>
-        👁️👁️
+        {getEmoji()}
       </AnimatedText>
-      <HoverCards /> {/* Add HoverCards component */}
+      <HoverCards setHoveredCard={setHoveredCard} /> {/* Pass setHoveredCard to HoverCards */}
     </SectionWrapper>
   );
 };
