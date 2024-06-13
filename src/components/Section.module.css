@@ -1,0 +1,10 @@
+/* src/components/Section.module.css */
+.section {
+    height: 100vh; /* Full viewport height */
+    width: 100%; /* Full width */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    scroll-snap-align: start; /* Ensure snap alignment */
+  }
+  

@@ -1,0 +1,14 @@
+/* src/pages/Home.module.css */
+.sectionOne {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #6b73ff 10%, #000dff 100%);
+}
+
+.sectionTwo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #ff73f3 10%, #ff00d4 100%);
+}
