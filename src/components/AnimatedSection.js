@@ -47,6 +47,7 @@ const AnimatedSection = () => {
   const sectionRef = useRef(null);
   const [hoveredCard, setHoveredCard] = useState(null);
   const [activeQuestionnaire, setActiveQuestionnaire] = useState(null);
+  const [emoji, setEmoji] = useState("👁️👁️");
   const [{ xy, bg }, api] = useSpring(() => ({
     xy: [0, 0],
     bg: [0, 0],
@@ -71,33 +72,20 @@ const AnimatedSection = () => {
       if (sectionRef.current) {
         sectionRef.current.removeChild(ripple);
       }
-    }, 600); // Ensure this is a function
-  };
-
-  const getEmoji = () => {
-    switch (hoveredCard) {
-      case 'Web3':
-        return '🌐';
-      case 'FullStack':
-        return '💻';
-      case 'Poker':
-        return '🃏';
-      default:
-        return '👁️👁️';
-    }
+    }, 600);
   };
 
   return (
     <SectionWrapper ref={sectionRef} onMouseMove={handleMouseMove}>
       <BackgroundLayer style={{ transform: bg.to(bgTrans) }} />
       <AnimatedText style={{ transform: xy.to(trans) }}>
-        {getEmoji()}
+        {emoji}
       </AnimatedText>
       <HoverCards setHoveredCard={setHoveredCard} setActiveQuestionnaire={setActiveQuestionnaire} />
       <div className={styles.questionnaireContainer}>
-        {activeQuestionnaire === 'Web3' && <Web3Questionnaire />}
-        {activeQuestionnaire === 'FullStack' && <FullStackQuestionnaire />}
-        {activeQuestionnaire === 'Poker' && <PokerQuestionnaire />}
+        {activeQuestionnaire === 'Web3' && <Web3Questionnaire setEmoji={setEmoji} />}
+        {activeQuestionnaire === 'FullStack' && <FullStackQuestionnaire setEmoji={setEmoji} />}
+        {activeQuestionnaire === 'Poker' && <PokerQuestionnaire setEmoji={setEmoji} />}
       </div>
     </SectionWrapper>
   );
