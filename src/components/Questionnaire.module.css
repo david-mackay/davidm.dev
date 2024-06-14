@@ -1,0 +1,36 @@
+/* src/components/Questionnaire.module.css */
+.questionnaire {
+    text-align: center;
+    margin: 20px;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    width: 100%; /* Ensure full width on mobile */
+  }
+  
+  .questionnaire input {
+    margin: 10px;
+    padding: 5px;
+    font-size: 1rem;
+  }
+  
+  .questionnaire button {
+    margin: 10px;
+    padding: 5px 10px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .questionnaire p {
+    margin: 10px 0;
+  }
+  
+  @media (max-width: 768px) {
+    .questionnaire {
+      margin: 10px auto;
+      width: 90%; /* Ensure full width on mobile */
+    }
+  }
+  

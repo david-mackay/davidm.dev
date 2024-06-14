@@ -1,10 +1,10 @@
-// src/components/HoverCards.js
 import React from 'react';
 import styles from './HoverCards.module.css';
 
-const HoverCards = ({ setHoveredCard }) => {
+const HoverCards = ({ setHoveredCard, setActiveQuestionnaire }) => {
   const handleMouseEnter = (card) => {
     setHoveredCard(card);
+    setActiveQuestionnaire(card);
   };
 
   const handleMouseLeave = () => {

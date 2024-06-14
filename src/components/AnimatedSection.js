@@ -1,8 +1,10 @@
-// src/components/AnimatedSection.js
 import React, { useRef, useState } from 'react';
 import { useSpring, animated } from 'react-spring';
 import styled from 'styled-components';
-import HoverCards from './HoverCards'; // Import HoverCards component
+import HoverCards from './HoverCards';
+import Web3Questionnaire from './Web3Questionnaire';
+import FullStackQuestionnaire from './FullStackQuestionnaire';
+import PokerQuestionnaire from './PokerQuestionnaire';
 import styles from './AnimatedSection.module.css';
 
 const SectionWrapper = styled.div`
@@ -10,6 +12,7 @@ const SectionWrapper = styled.div`
   width: 100vw;
   overflow: hidden;
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   position: relative;
@@ -18,13 +21,17 @@ const SectionWrapper = styled.div`
   font-size: 2rem;
   text-align: center;
   perspective: 1000px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const AnimatedText = styled(animated.div)`
   font-size: 4rem;
   font-weight: bold;
   position: absolute;
-  z-index: 2; /* Ensure text is above the background */
+  z-index: 2;
 `;
 
 const BackgroundLayer = styled(animated.div)`
@@ -33,12 +40,13 @@ const BackgroundLayer = styled(animated.div)`
   height: 200%;
   background: radial-gradient(circle, rgba(107,115,255,0.5) 0%, rgba(0,13,255,0.5) 100%);
   will-change: transform;
-  z-index: 1; /* Ensure background is behind the text */
+  z-index: 1;
 `;
 
 const AnimatedSection = () => {
   const sectionRef = useRef(null);
   const [hoveredCard, setHoveredCard] = useState(null);
+  const [activeQuestionnaire, setActiveQuestionnaire] = useState(null);
   const [{ xy, bg }, api] = useSpring(() => ({
     xy: [0, 0],
     bg: [0, 0],
@@ -55,13 +63,15 @@ const AnimatedSection = () => {
 
     const ripple = document.createElement('div');
     ripple.className = styles.ripple;
-    ripple.style.left = `${x - 25}px`; // Adjust for ripple size (50px / 2)
+    ripple.style.left = `${x - 25}px`;
     ripple.style.top = `${y - 25}px`;
     sectionRef.current.appendChild(ripple);
 
     setTimeout(() => {
-      sectionRef.current.removeChild(ripple);
-    }, 600); // Match the animation duration
+      if (sectionRef.current) {
+        sectionRef.current.removeChild(ripple);
+      }
+    }, 600); // Ensure this is a function
   };
 
   const getEmoji = () => {
@@ -83,7 +93,12 @@ const AnimatedSection = () => {
       <AnimatedText style={{ transform: xy.to(trans) }}>
         {getEmoji()}
       </AnimatedText>
-      <HoverCards setHoveredCard={setHoveredCard} /> {/* Pass setHoveredCard to HoverCards */}
+      <HoverCards setHoveredCard={setHoveredCard} setActiveQuestionnaire={setActiveQuestionnaire} />
+      <div className={styles.questionnaireContainer}>
+        {activeQuestionnaire === 'Web3' && <Web3Questionnaire />}
+        {activeQuestionnaire === 'FullStack' && <FullStackQuestionnaire />}
+        {activeQuestionnaire === 'Poker' && <PokerQuestionnaire />}
+      </div>
     </SectionWrapper>
   );
 };

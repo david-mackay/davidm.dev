@@ -1,4 +1,3 @@
-// src/pages/Home.js
 import React from 'react';
 import AnimatedSection from '../components/AnimatedSection';
 import Section from '../components/Section';

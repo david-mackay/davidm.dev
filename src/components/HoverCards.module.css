@@ -3,7 +3,7 @@
   display: flex;
   height: 100vh;
   width: 100vw;
-  position: relative;
+  position: relative; /* Ensure ripple is behind the hover cards */
 }
 
 .left {
@@ -15,6 +15,14 @@
   padding: 1rem;
 }
 
+.right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  padding: 1rem;
+}
+
 .card {
   background-color: #444;
   color: white;
@@ -22,32 +30,72 @@
   margin: 1rem 0;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s;
-  border-radius: 10px;
+  border-radius: 10px; /* Rounded corners */
   position: relative;
-  z-index: 3;
+  z-index: 3; /* Ensure cards are above the ripple */
 }
 
 .card:hover {
   background-color: #666;
-  transform: scale(1.05);
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.cardDetail {
+  background-color: #282c34;
+  color: white;
+  padding: 2rem;
+  border-radius: 10px;
+  transition: opacity 0.5s;
+  position: relative;
+  z-index: 2; /* Ensure details are above the ripple */
+  height: 30vh;
+  width: 30vh;
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.fadeIn {
+  opacity: 1;
+  animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @media (max-width: 768px) {
   .container {
-    flex-direction: column-reverse;
+    flex-direction: column-reverse; /* Stack the left section below the right section */
   }
 
   .left {
-    width: 90%;
+    width: 100%;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    margin-top: auto;
+  }
+
+  .right {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1rem;
   }
 
   .card {
     flex: 1;
-    margin: 0.2rem;
+    margin: 0.5rem;
     text-align: center;
-    max-width: 30vw;
+    max-width: 27vw; /* Ensure the cards do not exceed the viewport width */
+  }
+
+  .cardDetail {
+    width: 80%;
+    margin: 1rem auto; /* Adjust margin to ensure it is centered */
   }
 }

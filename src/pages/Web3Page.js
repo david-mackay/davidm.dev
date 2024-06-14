@@ -10,7 +10,7 @@ const Web3Page = () => {
     for (let i = 0; i < totalChars; i++) {
       text += `<span class="${styles.dynamicText}">${String.fromCharCode(33 + Math.random() * 94)}</span>`;
       if ((i + 1) % charsPerRow === 0) {
-        text += '<br>'; // add a line break at the end of each row
+        text += '<br>';
       }
     }
     return text;
@@ -20,8 +20,6 @@ const Web3Page = () => {
     const word = "WELCOME";
     const asciiArt = [];
     const wordLength = word.length;
-    
-    // ASCII art templates for each letter
     const asciiLetters = {
       'W': [
         'W   W ',
@@ -67,18 +65,14 @@ const Web3Page = () => {
       ]
     };
     
-    // Calculate the maximum width of a letter
     const maxLetterWidth = Math.max(...Object.values(asciiLetters).map(template => template[0].length));
-    
-    // Calculate the scale factor based on the available width
+
     const scaleFactor = Math.floor(charsPerRow / (wordLength * maxLetterWidth));
     
-    // Initialize the empty ascii art with spaces
     for (let i = 0; i < rows; i++) {
       asciiArt.push(new Array(charsPerRow).fill(' '));
     }
-    
-    // Function to print a letter in the ascii art
+
     const printLetter = (letter, startRow, startCol, scaleFactor) => {
       const template = asciiLetters[letter];
       if (!template) return;
@@ -96,23 +90,20 @@ const Web3Page = () => {
       }
     };
     
-    // Calculate the start position for the word
     const startRow = Math.floor((rows - 5 * scaleFactor) / 2);
     const startCol = Math.floor((charsPerRow - wordLength * maxLetterWidth * scaleFactor) / 2);
     
-    // Print each letter in the word
     for (let i = 0; i < wordLength; i++) {
       printLetter(word[i], startRow, startCol + i * maxLetterWidth * scaleFactor, scaleFactor); // Adjust spacing between letters as needed
     }
     
-    // Join the ascii art into a single string
     return asciiArt.map(row => row.join('')).join('<br>');
   }
 
   useEffect(() => {
     const updateText = () => {
-      const charWidth = 12.1; // approximate width of a character in pixels
-      const charHeight = 21; // approximate height of a character in pixels
+      const charWidth = 12.1;
+      const charHeight = 21; 
       const width = window.innerWidth;
       const height = window.innerHeight;
       const charsPerRow = Math.floor(width / charWidth);
@@ -136,7 +127,7 @@ const Web3Page = () => {
       if (!showWelcome) {
         const elements = document.getElementsByClassName(styles.dynamicText);
         for (let element of elements) {
-          if (Math.random() < 0.1) { // Change 10% of characters each tick
+          if (Math.random() < 0.1) {
             element.textContent = String.fromCharCode(33 + Math.random() * 94);
           }
         }
